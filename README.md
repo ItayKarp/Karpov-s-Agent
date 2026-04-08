@@ -97,7 +97,7 @@ uv sync
 ```
 
 <details>
-<summary><b>Environment variables</b> — create <code>backend/.env</code></summary>
+<summary><b>Environment variables</b> — use <code>backend/.env.example</code> and rename to .env</summary>
 
 ```env
 MONGODB_URI=<your-mongodb-atlas-uri>
