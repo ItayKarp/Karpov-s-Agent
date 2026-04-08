@@ -17,6 +17,10 @@
 A full-stack AI chat application with a React frontend and a multi-agent FastAPI backend.
 Features real-time streaming, persistent chat history, cross-session memory, and intelligent query routing.
 
+<br/>
+
+![Demonstration](docs/demonstration.gif)
+
 </div>
 
 ---
