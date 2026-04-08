@@ -91,6 +91,8 @@ Features real-time streaming, persistent chat history, cross-session memory, and
 
 ```bash
 cd backend
+uv venv
+source .venv/bin/activate
 uv sync
 ```
 
@@ -117,8 +119,6 @@ JWT_PUBLIC_KEY_PATH=./certs/public_key.pem
 </details>
 
 ```bash
-fastapi run app/main.py
-# or
 uvicorn app.main:app --reload
 ```
 
