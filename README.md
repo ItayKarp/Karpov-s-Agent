@@ -20,6 +20,8 @@ Features real-time streaming, persistent chat history, cross-session memory, and
 <br/>
 
 ![Demonstration](docs/demonstration.gif)
+<br/>
+![Demonstration](docs/chats-demonstration.gif)
 
 </div>
 

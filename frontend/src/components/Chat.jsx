@@ -109,7 +109,7 @@ export default function Chat({ ChatId = null, setChatId, isNewChat, setIsNewChat
     return (
         <div className={"chat-container"}>
             <div className="chat-header">
-                {title && <h2>{title}</h2>}
+                {title && <ReactMarkdown>{title}</ReactMarkdown>}
             </div>
             <div className="new-chat">
                 <button onClick={() => {setChatId(null); setIsNewChat(true)}}>

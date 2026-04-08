@@ -3,7 +3,7 @@ import {getHistory, deleteChat} from "../api/chat.js";
 import {useAuthFetch} from "../hooks/useAuthFetch.js";
 import ReactMarkdown from "react-markdown";
 
-export default function ChatList({ onSelectChat, setIsNewChat }) {
+export default function ChatList({ onSelectChat, setIsNewChat, selectedChatId }) {
     const authFetch = useAuthFetch()
     const [chats, setChats] = useState([])
     async function loadHistory() {
@@ -14,6 +14,10 @@ export default function ChatList({ onSelectChat, setIsNewChat }) {
      function delChat(chat_id) {
         deleteChat(chat_id, authFetch)
         setChats(chats.filter(chat => chat.chat_id !== chat_id))
+        if (chat_id === selectedChatId) {
+            onSelectChat(null)
+            setIsNewChat(true)
+        }
     }
     useEffect(() => {
         loadHistory()

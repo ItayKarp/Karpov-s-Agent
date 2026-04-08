@@ -17,7 +17,7 @@ export default function Home() {
             </div>
         </nav>
         <div className="workspace">
-            <ChatList onSelectChat={setSelectedChatId} setIsNewChat={setIsNewChat}/>
+            <ChatList onSelectChat={setSelectedChatId} setIsNewChat={setIsNewChat} selectedChatId={selectedChatId}/>
             <Chat ChatId={selectedChatId} setChatId={setSelectedChatId} isNewChat={isNewChat} setIsNewChat={setIsNewChat}/>
         </div>
     </div>
