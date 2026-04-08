@@ -42,13 +42,13 @@ Features real-time streaming, persistent chat history, cross-session memory, and
 
 | | Feature | Description |
 |---|---|---|
-| 🤖 | **Dual-Agent Orchestration** | Intent classifier routes queries to BasicAgent or AdvancedAgent based on complexity |
-| ⚡ | **Streaming AI Responses** | Tokens stream in real-time with visible chain-of-thought reasoning |
-| 💾 | **Persistent Chat History** | Conversations stored in MongoDB with LLM-generated titles |
-| 🧠 | **Cross-Session Memory** | Mem0 remembers user preferences and context across sessions |
-| 🔍 | **Web Search & Academic Papers** | Tavily search and arXiv MCP server for research-oriented queries |
+| 🤖 | **Dual-Agent Orchestration** | GPT-powered intent classifier routes each query to BasicAgent (Tavily search) or AdvancedAgent (Tavily + arXiv + fetch) based on complexity |
+| ⚡ | **Streaming AI Responses** | Tokens stream in real-time via SSE with visible chain-of-thought reasoning (tool calls, thinking steps, elapsed time) |
+| 💾 | **Persistent Chat History** | Conversations stored in MongoDB with Redis caching and LLM-generated titles |
+| 🧠 | **Cross-Session Memory** | After each response, an LLM extracts long-term user facts and stores them in Mem0; relevant memories are semantically retrieved and injected into every new prompt |
+| 🔍 | **Web Search & Academic Papers** | Tavily for web search; arXiv MCP server and fetch MCP server available to the AdvancedAgent |
 | 📝 | **Markdown Rendering** | AI responses render with full markdown support |
-| 🔐 | **JWT Authentication** | RSA-512 signed access/refresh token flow with rate limiting |
+| 🔐 | **JWT Authentication** | RS512-signed access/refresh token flow with bcrypt password hashing and rate limiting |
 
 ---
 
@@ -172,15 +172,15 @@ frontend/src/
 ```
 backend/app/
 ├── agents/                 # BasicAgent, AdvancedAgent, shared BaseClass
-├── orchestrator/           # Intent classifier + agent orchestrator
-├── tools/                  # Tavily search, MCP tool registry
-├── services/               # Auth service, title generation service
+├── orchestrator/           # IntentClassifier, AgentOrchestrator
+├── tools/                  # Tavily search tools
+├── services/               # AuthService, TitleService, MemoryService
 ├── api/
 │   ├── routers/            # /chat, /auth/*, /chats endpoints
 │   ├── dependencies.py     # Dependency injection providers
 │   └── auth_dependencies.py
 ├── infrastructure/
-│   ├── db/                 # MongoDB + Redis client managers
+│   ├── db/                 # MongoDB, Redis, Mem0 client managers
 │   └── repositories/       # ChatRepository, AuthRepository
 ├── core/                   # App config, lifespan, MCP setup
 └── models/                 # Pydantic schemas & DTOs
