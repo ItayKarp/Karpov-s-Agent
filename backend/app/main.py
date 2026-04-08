@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI
 from app.core.lifespan import lifespan
 from app.api.routers import auth_router, ai_router, chat_router

@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     tavily_api_key: str
     mem0_api_key: str
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     @cached_property
     def private_key(self) -> str:
