@@ -1,21 +1,17 @@
 import json
 from time import time
 from langchain_core.messages import HumanMessage, AIMessage
-from langchain_openai import ChatOpenAI
-
-from app.core.config import settings
 
 class BaseClass:
-    def __init__(self, chat_repo, title_service):
+    def __init__(self, chat_repo, title_service, memory_service):
         self.chat_repo = chat_repo
+        self.memory_service = memory_service
+        self.title_service = title_service
         self.dictionary_tools = {
             "tavily_search_results_json": lambda tool_input: f"Searching the web for {tool_input['query']}",
             "search_papers": lambda tool_input: f"Looking up academic papers on {tool_input['query']}",
             "fetch": lambda tool_input: f"Fetching content from {tool_input['url']}",
-            "search-memories": lambda tool_input: "Retrieving your memories...",
-            "add-memory": lambda tool_input: "Saving this to memory..."
         }
-        self.title_service = title_service
 
     async def get_compatible_history(self, user_id, chat_id):
         raw_history = await self.chat_repo.get_five_messages(chat_id=chat_id, user_id=user_id)
@@ -29,10 +25,9 @@ class BaseClass:
 
         return history_messages
 
-    async def _stream(self, llm, system, chat_history, query, user_id, chat_id):
+    async def _stream(self, llm, system, chat_history, query, user_id, chat_id, start_time):
         full_response = ""
         root_run_id = None
-        start_time = time()
         thoughts = []
         try:
             async for event in llm.astream_events({"messages": [system, *chat_history, HumanMessage(content=query)]}):
@@ -65,10 +60,11 @@ class BaseClass:
 
                 elif kind == "on_chain_end":
                     if event["run_id"] == root_run_id:
-                        elapsed = round(time()- start_time, 1)
+                        elapsed = round(time() - start_time, 1)
                         thoughts.append({"type": "end", "content": f"Thought for {elapsed} seconds"})
+                        yield json.dumps({"type": "end", "content": f"Thought for {elapsed} seconds"}) + "\n"
                         await self.chat_repo.save_message(role="assistant",message= full_response, user_id=user_id, chat_id=chat_id, thoughts=thoughts)
                         await self.title_service.handle_title(chat_id, user_id, query, full_response)
-                        yield json.dumps({"type": "end", "content": f"Thought for {elapsed} seconds"}) + "\n"
+                        await self.memory_service.process(user_message=query, ai_response=full_response, user_id=user_id)
         except Exception as e:
             yield json.dumps({"type": "error", "content": str(e)}) + "\n"

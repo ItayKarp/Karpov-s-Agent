@@ -2,12 +2,14 @@ import json
 
 from bson import ObjectId
 from datetime import datetime,UTC
+import asyncio
 
 
 class ChatRepository:
-    def __init__(self, mongo_client, redis_client):
+    def __init__(self, mongo_client, redis_client, mem0_client):
         self.mongo_client = mongo_client
         self.redis_client = redis_client
+        self.mem0_client = mem0_client
         self.mongo_db = self.mongo_client["AIChatBots"]
         self.mongo_collection = self.mongo_db["exercise_1"]
         self.redis_key = lambda chat_id: f"chat:{chat_id}:messages"
@@ -143,3 +145,11 @@ class ChatRepository:
             {"$pull": {"chats": {"_id": ObjectId(chat_id)}}}
         )
         return result.modified_count > 0
+
+    async def get_relevant_memories(self, query, user_id):
+        result = await asyncio.to_thread(self.mem0_client.search, query, filters={"user_id": user_id}, limit=7)
+        memory_block = "\n".join(f"- {m['memory']}" for m in result.get("results", []))
+        return memory_block
+
+    async def save_memory(self, fact:str, user_id:str):
+        return await asyncio.to_thread(self.mem0_client.add, fact, user_id=user_id)

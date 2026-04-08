@@ -1,10 +1,10 @@
-from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain_community.utilities.tavily_search import TavilySearchAPIWrapper
+from langchain_tavily import TavilySearch
 
+import os
 from app.core import settings
 
 
 async def get_search_tools():
-    wrapper = TavilySearchAPIWrapper(tavily_api_key=settings.tavily_api_key)
-    tavily_tool = TavilySearchResults(max_results=5, api_wrapper=wrapper)
+    os.environ["TAVILY_API_KEY"] = settings.tavily_api_key
+    tavily_tool = TavilySearch(max_results=5)
     return [tavily_tool,]

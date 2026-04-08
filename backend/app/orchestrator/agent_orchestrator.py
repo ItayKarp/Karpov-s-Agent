@@ -1,6 +1,7 @@
 from typing import Callable, Dict
-
+from time import time
 from starlette.responses import StreamingResponse
+import asyncio
 
 from app.models.schemas import AIQuerySchema
 
@@ -12,16 +13,25 @@ class AgentOrchestrator:
         self.basic_agent = basic_agent
 
     async def run(self, user_id: str, body: AIQuerySchema):
-
-        chat_id = await self.chat_repo.create_chat(user_id) if not body.chat_id else body.chat_id
-
-        mode = await self.intent_classifier.classify(body.prompt)
+        start_time = time()
+        if body.chat_id:
+            mode, memories = await asyncio.gather(
+                self.intent_classifier.classify(body.prompt),
+                self.chat_repo.get_relevant_memories(body.prompt, user_id),
+            )
+            chat_id = body.chat_id
+        else:
+            chat_id, mode, memories = await asyncio.gather(
+                self.chat_repo.create_chat(user_id),
+                self.intent_classifier.classify(body.prompt),
+                self.chat_repo.get_relevant_memories(body.prompt, user_id),
+            )
 
         modes: Dict[str, Callable] = {
             "advanced" : self.advanced_agent.execute,
             "basic" : self.basic_agent.execute
         }
 
-        stream = modes.get(mode)(body.prompt, user_id, chat_id)
+        stream = modes.get(mode)(body.prompt, user_id, chat_id, memories, start_time)
 
         return StreamingResponse(stream, media_type="text/event-stream", headers={"X_Chat_Id": str(chat_id)})
