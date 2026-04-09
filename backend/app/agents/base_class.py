@@ -1,6 +1,7 @@
 import json
 from time import time
 from langchain_core.messages import HumanMessage, AIMessage
+import asyncio
 
 class BaseClass:
     def __init__(self, chat_repo, title_service, memory_service):
@@ -63,8 +64,20 @@ class BaseClass:
                         elapsed = round(time() - start_time, 1)
                         thoughts.append({"type": "end", "content": f"Thought for {elapsed} seconds"})
                         yield json.dumps({"type": "end", "content": f"Thought for {elapsed} seconds"}) + "\n"
-                        await self.chat_repo.save_message(role="assistant",message= full_response, user_id=user_id, chat_id=chat_id, thoughts=thoughts)
-                        await self.title_service.handle_title(chat_id, user_id, query, full_response)
-                        await self.memory_service.process(user_message=query, ai_response=full_response, user_id=user_id)
+                        await asyncio.gather(
+                            self.chat_repo.save_message(role="assistant", message=full_response, user_id=user_id,
+                                                        chat_id=chat_id, thoughts=thoughts),
+                            self.title_service.handle_title(chat_id, user_id, query, full_response),
+                            self.memory_service.process(user_message=query, ai_response=full_response, user_id=user_id)
+                        )
         except Exception as e:
             yield json.dumps({"type": "error", "content": str(e)}) + "\n"
+
+    @staticmethod
+    def get_context_section(docs):
+        context_section = ""
+        if docs:
+            context = "\n\n".join([doc.page_content for doc in docs])
+            context_section = f"\n\nRelevant campus information:\n{context}\n\n Use the information above to answer if relevant."
+
+        return context_section

@@ -3,7 +3,7 @@ from app.agents.advanced_agent import AdvancedAgent
 from app.agents.basic_agent import BasicAgent
 from app.infrastructure.repositories.chat_repository import ChatRepository
 from app.orchestrator.agent_orchestrator import AgentOrchestrator
-from app.orchestrator.intent_classifier import IntentClassifier
+from app.services.intent_classifier_service import IntentClassifierService
 from app.services.memory_service import MemoryService
 from app.services.title_service import TitleService
 from app.infrastructure.db import MongoManager, RedisManager, Mem0Manager
@@ -37,15 +37,17 @@ async def get_agent_orchestrator(
 ):
     basic_tools = request.app.state.basic_tools
     advanced_tools = request.app.state.advanced_tools
+    vector_store = request.app.state.vector_store
 
     return AgentOrchestrator(
-        intent_classifier=IntentClassifier(),
+        intent_classifier=IntentClassifierService(),
         chat_repo=chat_repo,
+        vector_store= vector_store,
         advanced_agent= AdvancedAgent(
             chat_repo=chat_repo,
             tools=advanced_tools,
             title_service=title_service,
-            memory_service=memory_service
+            memory_service=memory_service,
         ),
         basic_agent= BasicAgent(
             chat_repo=chat_repo,

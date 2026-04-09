@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     jwt_public_key_path: str
     tavily_api_key: str
     mem0_api_key: str
+    pinecone_api_key: str
+    pinecone_index_name: str
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

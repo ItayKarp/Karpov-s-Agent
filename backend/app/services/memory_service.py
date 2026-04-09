@@ -1,4 +1,6 @@
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
 from app.core.config import settings
@@ -24,14 +26,16 @@ class MemoryService:
    
   If nothing is worth saving, return exactly: NONE                                                                                                        
   Otherwise return one concise sentence starting with "User" """
-
-    async def process(self, user_message:str, ai_response: str, user_id: str):
-        result = await self.memory_llm.ainvoke([
+        self.prompt = ChatPromptTemplate.from_messages([
             SystemMessage(content=self.extraction_prompt),
-            HumanMessage(content=user_message),
-            AIMessage(content=ai_response)
+            HumanMessage(content="{query}"),
+            AIMessage(content="{query}")
         ])
-        fact = str(result.content).strip()
-        if fact and fact != "NONE":
+
+    async def process(self, query : str, ai_response: str, user_id: str):
+        chain = self.prompt | self.memory_llm | StrOutputParser()
+        result = await chain.ainvoke({"query":query, "ai_response": ai_response})
+        fact = result.strip()
+        if fact and fact.lower() != "none":
             return await self.chat_repo.save_memory(fact, user_id)
         return None
