@@ -1,3 +1,4 @@
+from typing import Literal
 from pydantic import BaseModel, EmailStr
 
 class AIQuerySchema(BaseModel):
@@ -14,3 +15,9 @@ class RegisterSchema(BaseModel):
 class LoginSchema(BaseModel):
     username:str
     password:str
+
+class IntentClassifierSchema(BaseModel):
+    mode: Literal["basic", "advanced"]
+
+class RetrievalRouterSchema(BaseModel):
+    content: bool

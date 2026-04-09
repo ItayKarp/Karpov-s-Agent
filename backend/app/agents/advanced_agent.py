@@ -12,17 +12,20 @@ class AdvancedAgent(BaseClass):
         model = ChatOpenAI(model="gpt-5.4", max_tokens=3000, timeout=60, api_key=settings.openai_api_key)
         self.llm = create_agent(model=model, tools=[*tools])
 
-    async def execute(self, query: str, user_id, chat_id, memories, start_time):
+    async def execute(self, query: str, user_id, chat_id, memories, docs, start_time):
         chat_history, _ = await asyncio.gather(
             self.get_compatible_history(chat_id=chat_id, user_id=user_id),
             self.chat_repo.save_message(user_id=user_id, chat_id=chat_id, role="user", message=query)
         )
+
+        context_section = self.get_context_section(docs=docs)
 
         system = SystemMessage(
             content=f"You are an advanced AI assistant. You are professional, precise, and thorough in your responses. "
                     f"You have access to tools for searching the web, fetching content, and searching academic papers — use them when needed to provide accurate and up-to-date information. "
                     f"What you know about this user:"
                     f"{memories}"
+                    f"{context_section}"
                     f"Answer clearly and concisely."
         )
 
