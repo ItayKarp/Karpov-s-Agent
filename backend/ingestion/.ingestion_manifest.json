@@ -1,0 +1,52 @@
+{
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/academic_calendar.md": {
+    "hash": "1fab014c436f0186e877c0f077b3369af76c5e73a71efda22e28ef195b401db7",
+    "chunk_count": 3,
+    "filename": "academic_calendar.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/campus_map_and_locations.md": {
+    "hash": "ced74f7d564a4ffe616c91ccb49e38711e7beb9aef6e25a2b7e5ef72029dcbcf",
+    "chunk_count": 8,
+    "filename": "campus_map_and_locations.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/clubs_and_organizations.md": {
+    "hash": "5920933fd1e5c0073531c787f4bb2eea8ecc72857ccaa1445d5690a623bf0d4f",
+    "chunk_count": 10,
+    "filename": "clubs_and_organizations.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/course_catalog.md": {
+    "hash": "90375749b52b79fd365b6202179a21deb8bfdcac6bc353d5489b3f97e1992a40",
+    "chunk_count": 7,
+    "filename": "course_catalog.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/dining_and_housing.md": {
+    "hash": "dff1be877f43006938b2e4baa8ec683e98c724b7dac616401326f2493a416351",
+    "chunk_count": 10,
+    "filename": "dining_and_housing.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/financial_aid_faq.md": {
+    "hash": "7909fb5341226a03a6c733aadc8b05ca1c4f6a4597289ec55cd273fe23eb067c",
+    "chunk_count": 8,
+    "filename": "financial_aid_faq.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/it_services.md": {
+    "hash": "eb1c71d7b7068fbae3c34774290e6ba086824b6957e4e1bdbb8fb59c1d75182f",
+    "chunk_count": 12,
+    "filename": "it_services.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/library_services.md": {
+    "hash": "3b254376efe86e0ac65d53de12fa15c606f0672b90874af432e68ca77bf311e3",
+    "chunk_count": 11,
+    "filename": "library_services.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/registration_faq.md": {
+    "hash": "a0d940773736b222e939e2f07ae409152b362a639d2ba9426c12780ae9e345b7",
+    "chunk_count": 13,
+    "filename": "registration_faq.md"
+  },
+  "/Users/badonke/PycharmProjects/Karpov-s-Agent-main/backend/ingestion/docs/student_handbook.md": {
+    "hash": "797cfd715a3f69ec797e6335028bc128658ca32169c4aa7ba98a0655c69bcae5",
+    "chunk_count": 9,
+    "filename": "student_handbook.md"
+  }
+}
