@@ -19,6 +19,8 @@
 | Dec 18 | Fall semester grades due from faculty |
 | Dec 19 | Fall semester ends |
 
+**Questions this section answers:** When does fall semester start? When do fall classes begin? When is the first day of school in fall? When is fall break? When is Thanksgiving break? When are fall finals? When does fall semester end? What is the last day to add a course in fall? What is the last day to drop a course in fall with a full refund? When is the last day to withdraw from a fall course?
+
 ---
 
 ## Spring Semester 2026
@@ -39,6 +41,8 @@
 | May 15 | Commencement Ceremony |
 | May 16 | Spring semester ends |
 
+**Questions this section answers:** When does spring semester start? When do spring classes begin? When is spring break 2026? When are spring finals? When is graduation? When is commencement? When is the last day of spring classes? When is the last day to drop a spring course? When does spring semester end?
+
 ---
 
 ## Summer Sessions 2026
@@ -49,6 +53,8 @@
 | Summer II | Jul 6 – Aug 8 |
 | Full Summer | May 26 – Aug 8 |
 
+**Questions this section answers:** When do summer classes start? When does summer session begin? What summer sessions are available? How long is summer school?
+
 ---
 
 ## Key Registration Deadlines
@@ -58,8 +64,12 @@
 - **Late registration fee:** $50 applied after first week of classes
 - **Holds:** Academic, financial, or library holds block registration — clear holds before your registration window opens
 
+**Questions this section answers:** When does fall registration open? When does spring registration open? What is the late registration fee? What happens if I register late? What blocks me from registering?
+
 ## Grading Deadlines
 
 - Faculty must submit final grades within **72 hours** of the last scheduled exam.
 - Incomplete (I) grade requests must be submitted before the last week of classes.
 - Grade appeals must be filed within **30 days** of grade posting.
+
+**Questions this section answers:** How long do professors have to submit grades? When are grades due? How long do I have to appeal a grade? When can I request an incomplete grade?

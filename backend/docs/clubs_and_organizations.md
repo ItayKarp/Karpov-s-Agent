@@ -10,6 +10,8 @@
 
 **Club Fair:** Held the first Friday of each semester, 11 AM – 3 PM in the Student Union Ballroom. All recognized clubs have tables.
 
+**Questions this section answers:** How do I join a club? When is the club fair? Where is the club fair? How do I find clubs at Westbrook? Where do I sign up for a club?
+
 ---
 
 ## Starting a New Club
@@ -22,6 +24,8 @@
    - A university email address
    - Access to room booking
    - Eligibility for SGA funding ($200–$2,000/year based on proposal)
+
+**Questions this section answers:** How do I start a new club? How many students do I need to start a club? Where do I submit the club registration form? How do I get funding for a club? Who approves new clubs? What does a new club get when approved?
 
 ---
 
@@ -54,6 +58,8 @@
 - **Meetings:** Fridays 4:00 PM — ALD 310
 - **Contact:** mathclub@westbrook.edu
 
+**Questions this section answers:** Is there a computer science club? When does the CS Society meet? Is there a hackathon? Is there a business club? Is there a pre-law club? Is there a math club? What academic clubs are available?
+
 ---
 
 ## Cultural & Identity Organizations
@@ -82,6 +88,8 @@
 - **Meetings:** Thursdays 5:30 PM — SU 216
 - **Events:** Lunar New Year celebration, cultural showcase
 
+**Questions this section answers:** Is there an international students club? Is there an LGBTQ club or alliance? Is there a Black Student Union? Is there a Latino student organization? What cultural organizations are on campus?
+
 ---
 
 ## Arts & Media
@@ -105,6 +113,8 @@
 - **Meetings:** Tuesdays 7:00 PM — DAB 200 (Art Gallery)
 - **Access:** Members get keycard access to the darkroom lab
 
+**Questions this section answers:** Is there a student newspaper? Is there a theatre group? Is there a campus radio station? Is there a photography club? What arts clubs are available?
+
 ---
 
 ## Sports & Fitness
@@ -124,6 +134,8 @@
 - Register teams at: imleagues.westbrook.edu by Week 2 of each semester
 - Equipment provided; games played evenings at the WC or outdoor fields
 
+**Questions this section answers:** Are there club sports? How do I join intramural sports? Is there rock climbing on campus? Is there a volleyball club? When do intramural sports start? How do I register for intramurals?
+
 ---
 
 ## Service & Volunteering
@@ -138,6 +150,8 @@
 - **Sign up:** tutoring.westbrook.edu/volunteer
 - **Scheduling:** Flexible; tutors set their own availability
 
+**Questions this section answers:** How do I volunteer on campus? Is there a Habitat for Humanity chapter? Can I become a peer tutor? How do I get community service hours?
+
 ---
 
 ## SGA — Student Government Association
@@ -147,3 +161,5 @@
 - **Open meetings:** Wednesdays 5:00 PM — SU Ballroom (all students welcome)
 - **Elections:** Held in March for the following academic year
 - **Contact:** sga@westbrook.edu
+
+**Questions this section answers:** What is the SGA? How do I get involved in student government? When are SGA elections? When does the SGA meet? How do clubs get funding from SGA?

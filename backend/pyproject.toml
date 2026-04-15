@@ -23,4 +23,5 @@ dependencies = [
     "mem0ai>=1.0.11",
     "langchain-pinecone>=0.2.13",
     "pinecone>=7.3.0",
+    "pinecone-text>=0.11.0",
 ]
