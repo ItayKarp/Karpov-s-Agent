@@ -1,7 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-import redis
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
+
 from functools import cached_property
 
 class Settings(BaseSettings):
@@ -17,8 +15,10 @@ class Settings(BaseSettings):
     jwt_public_key_path: str
     tavily_api_key: str
     mem0_api_key: str
-    pinecone_api_key: str
-    pinecone_index_name: str
+    qdrant_url: str
+    qdrant_api_key: str
+    qdrant_embedding_model: str
+    qdrant_collection_name: str
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

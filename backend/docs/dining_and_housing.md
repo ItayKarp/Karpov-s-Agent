@@ -11,6 +11,8 @@
 - **RA on duty:** Nightly 8 PM – 8 AM
 - **Quiet hours:** Sun–Thu 10 PM – 8 AM; Fri–Sat 12 AM – 10 AM
 
+**Questions this section answers:** What is Founders Hall? Where do freshmen live? What dorms are available for first-year students? Does Founders Hall have laundry? What are quiet hours in Founders Hall?
+
 ### Lakeview Dorm
 - **Location:** East Campus
 - **Style:** Suite-style (4 students share a common area and 2 bathrooms)
@@ -19,6 +21,8 @@
 - **Amenities:** In-suite kitchen (mini fridge, microwave), rooftop study terrace, fitness room
 - **Quiet hours:** Sun–Thu 11 PM – 9 AM; Fri–Sat 1 AM – 10 AM
 
+**Questions this section answers:** What is Lakeview Dorm? Can freshmen live in Lakeview? What is suite-style housing? Does Lakeview have a kitchen?
+
 ### Summit Apartments
 - **Location:** South Campus
 - **Style:** Apartment-style (2–4 bed units with full kitchen and private bathrooms)
@@ -26,12 +30,16 @@
 - **Available to:** Junior, senior, and graduate students only
 - **Amenities:** Full kitchen (stove, dishwasher), in-unit laundry, parking (Lot D), private entrance
 
+**Questions this section answers:** What is Summit Apartments? Can juniors live in Summit Apartments? Is there apartment-style housing? Does Summit have a full kitchen? Is there parking at Summit Apartments?
+
 ### Oak House (Honors Residence)
 - **Location:** West Campus
 - **Style:** Single rooms with shared floor bathrooms
 - **Capacity:** 80 students
 - **Available to:** Students in the Honors Program
 - **Amenities:** Seminar room, honors library, fast WiFi (dedicated bandwidth)
+
+**Questions this section answers:** What is Oak House? Who can live in Oak House? Is there honors housing? What is the honors residence hall?
 
 ---
 
@@ -56,6 +64,8 @@
 - Specific roommate requests honored if mutual and both students complete the survey.
 - Roommate change requests accepted after the first 4 weeks of each semester (Housing Office, SU 180).
 
+**Questions this section answers:** How much does it cost to live on campus? How much is Founders Hall per semester? How much is Lakeview per semester? When does housing application open? What is the housing deposit? How do I request a specific roommate? Can I change my roommate? When is the housing application deadline?
+
 ---
 
 ## Dining Plans
@@ -72,6 +82,8 @@ All students living in Founders Hall, Lakeview, or Oak House are **required** to
 - **Dining Dollars** can be used at any campus dining location and roll over within the academic year (not summer).
 - Change your meal plan by the end of the second week of classes.
 - Contact: dining@westbrook.edu | (555) 200-5000
+
+**Questions this section answers:** What meal plans are available? Do I have to have a meal plan? How much does the meal plan cost? What is the Gold Plan? What are Dining Dollars? Can I change my meal plan? How much is the unlimited meal plan? Can Summit Apartments residents opt out of a meal plan?
 
 ---
 
@@ -106,6 +118,8 @@ All students living in Founders Hall, Lakeview, or Oak House are **required** to
 - **Hours:** Daily 9:00 PM – 12:00 AM
 - **Menu:** Pizza, burgers, fries, breakfast items
 
+**Questions this section answers:** Where can I eat on campus? What are the dining hall hours? Where is the main cafeteria? Is there late night food? Where can I get coffee on campus? Where is The Grind? Is there a convenience store on campus? Does the dining hall serve vegan food? Does the dining hall have halal options?
+
 ---
 
 ## Special Dietary Needs
@@ -114,3 +128,5 @@ Students with documented dietary restrictions or allergies should contact Dining
 - **Email:** diningneeds@westbrook.edu
 - **Meeting:** Schedule with the Dining Dietitian (available Mon–Thu)
 - Allergen information is posted at each station and on the dining app.
+
+**Questions this section answers:** What if I have dietary restrictions? How do I get help with food allergies on campus? Is there a dietitian? Where can I find allergen information?

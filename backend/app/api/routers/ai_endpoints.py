@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from starlette.responses import StreamingResponse
 
 from app.models.schemas import AIQuerySchema
-from app.api.dependencies import get_agent_orchestrator, get_chat_repo
+from app.api.dependencies import get_agent_orchestrator
 from app.api.auth_dependencies import get_current_user
 from app.orchestrator.agent_orchestrator import AgentOrchestrator
 

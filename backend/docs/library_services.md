@@ -15,6 +15,8 @@
 | Winter/Summer break | Mon–Fri 9:00 AM – 5:00 PM |
 | University holidays | Closed |
 
+**Questions this section answers:** What are the library hours? When does the library close? Is the library open 24 hours during finals? What time does the library open? Is the library open on weekends? Where is the library?
+
 ---
 
 ## Borrowing Policies
@@ -32,6 +34,8 @@
 - **Lost items:** Replacement cost + $25 processing fee
 - **Holds:** Place holds on checked-out items via the library catalog (catalog.westbrook.edu)
 
+**Questions this section answers:** How long can I borrow a book? How many books can I check out at once? What is the late fee for books? Can I renew library books? What happens if I lose a library book? How do I place a hold on a book?
+
 ---
 
 ## Equipment Lending
@@ -47,6 +51,8 @@ The library lends the following equipment free of charge (student ID required):
 
 Reserve equipment at: library.westbrook.edu/equipment
 
+**Questions this section answers:** Can I borrow a laptop from the library? How long can I borrow a laptop? Can I borrow a camera from the library? Does the library lend iPads? Can I borrow a calculator from the library? What equipment can I borrow from the library? Is equipment lending free?
+
 ---
 
 ## Physical Collections
@@ -55,6 +61,8 @@ Reserve equipment at: library.westbrook.edu/equipment
 - **Special Collections:** Rare books, university archives, local history — by appointment only (contact specialcollections@westbrook.edu)
 - **Curriculum Center:** K–12 teaching materials, children's books (LIB Floor 1, Room 120)
 - **Media Collection:** DVDs, CDs, vinyl records, streaming access codes (LIB Floor 2)
+
+**Questions this section answers:** How many books does the library have? Are there rare books at the library? Where are special collections? Does the library have DVDs?
 
 ---
 
@@ -84,7 +92,7 @@ Access all databases on-campus or via VPN off-campus.
 - **Historical Newspapers** — NYT, Chicago Tribune (historical archives)
 - **MLA International Bibliography** — Literature, linguistics
 
-Access all databases via: library.westbrook.edu/databases
+**Questions this section answers:** What research databases does the library have? How do I access JSTOR? Does the library have access to IEEE Xplore? Where can I find academic journals? How do I access databases from home? Is there a psychology research database? Where can I find business research?
 
 ---
 
@@ -96,6 +104,8 @@ Need an item Westbrook doesn't own? Request it through ILL.
 - **Turnaround:** Articles: 3–5 business days; Books: 1–2 weeks
 - **Limits:** Up to 10 active ILL requests at a time
 - **Request at:** library.westbrook.edu/ill (log in with student credentials)
+
+**Questions this section answers:** Can I get books the library doesn't have? What is interlibrary loan? How long does interlibrary loan take? Is interlibrary loan free? How do I request an interlibrary loan?
 
 ---
 
@@ -118,6 +128,8 @@ Each academic department has an assigned subject librarian:
 - Business: Ms. Sarah Park (spark@westbrook.edu)
 - Humanities: Mr. James Obi (jobi@westbrook.edu)
 
+**Questions this section answers:** Can I get help with research? Is there a librarian I can talk to? How do I get research help? Can I meet with a librarian one-on-one? Who is the librarian for computer science? Where is the reference desk?
+
 ---
 
 ## Printing & Scanning
@@ -127,6 +139,8 @@ Each academic department has an assigned subject librarian:
 - Print quota: 300 free B&W pages per semester (shared with other campus labs)
 - Scanning: Free; use the self-service scanners to scan to USB or email
 - Large-format printing (posters): Available at the library service desk — 24-hour advance notice required; $2–$10 depending on size
+
+**Questions this section answers:** Can I print at the library? How much does printing cost at the library? Is scanning free? Can I print posters at the library? Where are the printers in the library?
 
 ---
 
@@ -143,6 +157,8 @@ Each academic department has an assigned subject librarian:
 - **Book group study rooms:** calendar.westbrook.edu/library (up to 2 hours/day, 3 days in advance)
 - **Room policies:** Reserved for groups of 2+; cannot be used as personal office space
 
+**Questions this section answers:** Are there group study rooms in the library? How do I book a study room? Is there a quiet study area? How many people can use a study room? Is there a 24-hour study space? Where can I study on campus?
+
 ---
 
 ## Citation & Research Tools
@@ -151,3 +167,5 @@ Each academic department has an assigned subject librarian:
 - **Citation guides (APA, MLA, Chicago):** library.westbrook.edu/citing
 - **Turnitin access:** Via your course LMS (Canvas) — instructors enable per assignment
 - **Research guides (LibGuides):** Subject-specific starting points at guides.westbrook.edu
+
+**Questions this section answers:** How do I cite sources? Is there a citation manager? How do I use APA format? Where are citation guides? What is Zotero? How do I check for plagiarism?

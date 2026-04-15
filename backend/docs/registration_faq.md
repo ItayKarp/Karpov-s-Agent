@@ -14,6 +14,8 @@ Registration windows are assigned based on credit hours earned (not including in
 
 Check your exact registration date and time in the student portal under **My Registration**.
 
+**Questions this section answers:** When can I register for classes? When does registration open? Does registration depend on credits? When do seniors register? When do freshmen register? How do I find my registration date?
+
 ### How do I register for classes?
 1. Log in to the student portal at my.westbrook.edu.
 2. Navigate to **Registration → Course Search & Register**.
@@ -22,10 +24,14 @@ Check your exact registration date and time in the student portal under **My Reg
 5. At your registration window, submit your cart.
 6. Check your schedule under **My Schedule** to confirm enrollment.
 
+**Questions this section answers:** How do I register for classes? How do I enroll in a course? Where do I sign up for classes? How do I use the student portal to register? How do I confirm my enrollment?
+
 ### Do I need to see my advisor before registering?
 - **New freshmen and transfer students:** Yes — mandatory advising hold is placed; you must meet with your advisor before the hold is lifted.
 - **All other students:** Strongly recommended but not required. Advising hold may be placed if you are on academic probation.
 - Book advisor appointments at: advising.westbrook.edu (ALD 115, Mon–Fri 9 AM – 4 PM)
+
+**Questions this section answers:** Do I need to see an advisor before registering? Is advising required? What is an advising hold? Where do I book an advising appointment? Do transfer students need to see an advisor?
 
 ---
 
@@ -55,6 +61,8 @@ Check your exact registration date and time in the student portal under **My Reg
 | Week 5 | 25% |
 | Week 6+ | No refund |
 
+**Questions this section answers:** What is the last day to add a course? What is the last day to drop a course? Will dropping a course affect my GPA? Can I get a refund if I drop a course? How do I drop a class? What is a W grade? Can I drop a class after week 10?
+
 ---
 
 ## Waitlist Policy
@@ -74,6 +82,8 @@ Check your exact registration date and time in the student portal under **My Reg
 - You can be on a waitlist for up to **3 courses** simultaneously.
 - Waitlists close at the end of Week 2; after that, you need direct instructor/department permission.
 
+**Questions this section answers:** How does the waitlist work? How long do I have to accept a waitlist seat? Can I attend class while on the waitlist? How many classes can I be waitlisted for? What happens when a spot opens on the waitlist?
+
 ---
 
 ## Course Conflicts & Overrides
@@ -92,6 +102,8 @@ Check your exact registration date and time in the student portal under **My Reg
 ### Section override (closed section)
 - If a section is full and you have a compelling reason to be in that specific section:
   - Contact the instructor for a permission number (a code entered during registration).
+
+**Questions this section answers:** Can I take a course without the prerequisite? How do I get a prerequisite override? What do I do if two classes conflict? How do I get into a closed section? What is a permission number?
 
 ---
 
@@ -118,6 +130,8 @@ Check your exact registration date and time in the student portal under **My Reg
 - Shows completed, in-progress, and remaining requirements for your major and Gen Ed.
 - Discrepancies? Contact the Registrar (ADM 110) or your academic advisor (ALD 115).
 
+**Questions this section answers:** How many credits do I need to graduate? What GPA do I need to graduate? When do I apply to graduate? How do I apply for graduation? What is a degree audit? How do I check my graduation progress? When is the graduation application deadline?
+
 ---
 
 ## Transferring Credits
@@ -134,6 +148,8 @@ Check your exact registration date and time in the student portal under **My Reg
 - IB: Higher Level scores of 5+ generally earn credit; see westbrook.edu/ib-credit.
 - Submit official AP/IB scores to the Registrar.
 
+**Questions this section answers:** How do transfer credits work? How many transfer credits can I bring? Do AP credits transfer? Do IB credits count? How long does transfer credit evaluation take? Where do I submit transcripts?
+
 ---
 
 ## Contact
@@ -141,3 +157,5 @@ Check your exact registration date and time in the student portal under **My Reg
 - **Registrar's Office:** ADM 110 | (555) 200-1000 | registrar@westbrook.edu
 - **Academic Advising:** ALD 115 | advising.westbrook.edu | (555) 200-3000
 - **Walk-in hours:** Mon–Fri 9:00 AM – 4:30 PM
+
+**Questions this section answers:** How do I contact the registrar? Where is the registrar's office? How do I contact academic advising? What are the registrar's office hours?

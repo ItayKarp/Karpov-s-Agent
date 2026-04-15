@@ -10,8 +10,7 @@ class ChatRepository:
         self.mongo_client = mongo_client
         self.redis_client = redis_client
         self.mem0_client = mem0_client
-        self.mongo_db = self.mongo_client["AIChatBots"]
-        self.mongo_collection = self.mongo_db["exercise_1"]
+        self.mongo_collection = self.mongo_client["exercise_1"]
         self.redis_key = lambda chat_id: f"chat:{chat_id}:messages"
 
     async def create_chat(self, user_id):
@@ -31,7 +30,7 @@ class ChatRepository:
         )
         return str(chat_id)
 
-    async def save_message(self, role, message, user_id, chat_id, thoughts= None):
+    async def save_message(self, role, message, user_id, chat_id,thoughts = None):
         await self.mongo_collection.update_one(
             {"_id": ObjectId(user_id)},
             {
@@ -50,7 +49,6 @@ class ChatRepository:
             "role": role,
             "content": message,
             "sent_at": datetime.now(UTC).isoformat(),
-            "thoughts": thoughts
         })
         key = self.redis_key(chat_id)
         await self.redis_client.rpush(key, message_data)
@@ -72,7 +70,8 @@ class ChatRepository:
             serialized = json.dumps({
                 "role": msg["role"],
                 "content": msg["content"],
-                "sent_at": msg["sent_at"].isoformat()
+                "sent_at": msg["sent_at"].isoformat(),
+                "thoughts": msg["thoughts"]
             })
             await self.redis_client.rpush(key, serialized)
 

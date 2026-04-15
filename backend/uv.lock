@@ -435,6 +435,7 @@ dependencies = [
     { name = "pyjwt", extra = ["crypto"] },
     { name = "pymongo" },
     { name = "python-dotenv" },
+    { name = "qdrant-client" },
     { name = "redis" },
 ]
 
@@ -457,6 +458,7 @@ requires-dist = [
     { name = "pyjwt", extras = ["crypto"], specifier = ">=2.12.1" },
     { name = "pymongo", specifier = ">=4.16.0" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
+    { name = "qdrant-client", specifier = ">=1.17.1" },
     { name = "redis", specifier = ">=7.4.0" },
 ]
 
