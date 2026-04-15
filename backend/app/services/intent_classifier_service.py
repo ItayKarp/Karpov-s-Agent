@@ -9,7 +9,7 @@ from app.models.schemas import IntentClassifierSchema, RetrievalRouterSchema
 
 class IntentClassifierService:
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4.1-nano", api_key=settings.openai_api_key)
+        self.llm = ChatOpenAI(model="gpt-5.4-nano", api_key=settings.openai_api_key)
 
     async def classify(self, query: str) -> tuple[str, bool]:
         intent_classify_chain = self.get_intent_prompt() | self.llm.with_structured_output(IntentClassifierSchema)
