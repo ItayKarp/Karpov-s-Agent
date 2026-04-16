@@ -1,17 +1,80 @@
-.idea/
-.github/
-.claude
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+# ========================
+# Python
+# ========================
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/*.pyd
+**/*.pyz
+**/*.pywz
+**/.Python
+**/pip-log.txt
+**/pip-delete-this-directory.txt
+
+# Distribution / packaging
+**/build/
+**/dist/
+**/wheels/
+**/*.egg-info/
+**/*.egg
+**/.eggs/
+**/MANIFEST
+
 # Virtual environments
-.venv
-#Environment variables
-.env
-# Ignore python bytecode
-*.py[cod]
-# Ignore OS-specific files
-.DS_Store
+**/.venv/
+**/venv/
+**/env/
+**/ENV/
+**/.virtualenv/
+
+# ========================
+# Environment & Secrets
+# ========================
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample
+
+# ========================
+# IDEs & Editors
+# ========================
+**/.idea/
+**/.vscode/
+**/*.swp
+**/*.swo
+**/*~
+**/.project
+**/.classpath
+
+# ========================
+# OS
+# ========================
+**/.DS_Store
+**/.DS_Store?
+**/._*
+**/.Spotlight-V100
+**/.Trashes
+**/Thumbs.db
+**/ehthumbs.db
+**/desktop.ini
+
+# ========================
+# Node
+# ========================
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# ========================
+# Logs & temp files
+# ========================
+**/*.log
+**/*.tmp
+**/*.temp
+**/*.cache
+
+# ========================
+# Claude Code
+# ========================
+**/.claude/
