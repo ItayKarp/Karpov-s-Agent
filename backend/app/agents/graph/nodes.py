@@ -1,12 +1,14 @@
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.runnables import RunnableConfig
-from langchain_openai import ChatOpenAI
-from pydantic import BaseModel, Field
-from time import time
+import json
 import asyncio
+from time import time
+from pydantic import BaseModel, Field
+from langchain_openai import ChatOpenAI
+from langchain_core.callbacks import adispatch_custom_event
+from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage
+from langchain_core.runnables import RunnableConfig
 
-from app.agents.graph.state import AgentState
 from app.core import settings
+from app.agents.graph.state import AgentState
 from app.tools.tool_registry import get_tool_manifest
 
 
@@ -33,22 +35,28 @@ class AgentNodes:
         self.memory_service = memory_service
 
     async def setup(self, state: AgentState) -> dict:
+        await adispatch_custom_event("thought", {"content" : "Setting up ..."})
         user_id= state['user_id']
         chat_id = state['chat_id']
         prompt = state['messages'][-1].content
-        (mode, needs_retrieval), memories = await asyncio.gather(
+        (mode, needs_retrieval), memories, tools = await asyncio.gather(
             self.intent_classifier.classify(prompt),
-            self.chat_repo.get_relevant_memories(prompt, user_id))
+            self.chat_repo.get_relevant_memories(prompt, user_id),
+            self.select_tools(prompt)
+        )
+
 
         return {
             "chat_id": chat_id,
             "mode": mode,
             "needs_retrieval": needs_retrieval,
-            "memories": memories
+            "memories": memories,
+            "selected_tools": tools
         }
 
 
     async def retrieve_docs_node(self, state: AgentState) -> dict:
+        await adispatch_custom_event("thought", {"content" : "Retrieving docs ..."})
         needs_retrieval = state['needs_retrieval']
         prompt = state['messages'][-1].content
         docs = await self.vector_repository.get_docs(needs_retrieval, prompt)
@@ -58,17 +66,22 @@ class AgentNodes:
 
 
     async def advanced_agent_node(self, state: AgentState) -> dict:
-        response = await self.advanced_agent.execute(state)
-        return {"messages": [response]}
+        await adispatch_custom_event("thought", {"content" : "Thinking ..."})
+        updated_state = {**state, "selected_tools": await self._get_updated_tools(state)}
+        response = await self.advanced_agent.execute(updated_state)
+        return {"messages": [response], "selected_tools": updated_state["selected_tools"]}
 
 
     async def basic_agent_node(self, state: AgentState):
-        response = await self.basic_agent.execute(state)
-        return {"messages": [response]}
+        await adispatch_custom_event("thought", {"content" : "Thinking ..."})
+        updated_state = {**state, "selected_tools": await self._get_updated_tools(state)}
+        response = await self.basic_agent.execute(updated_state)
+        return {"messages": [response], "selected_tools": updated_state["selected_tools"]}
 
     async def finalize_node(self, state: AgentState, config: RunnableConfig) -> dict:
         start_time = config["configurable"]["start_time"]
         elapsed_time = round(time() - start_time, 1)
+        await adispatch_custom_event("thought", {"content" : f"Thought for {elapsed_time}s"})
         prompt = ""
         for message in reversed(state['messages']):
             if isinstance(message, HumanMessage):
@@ -88,8 +101,7 @@ class AgentNodes:
 
 
     @staticmethod
-    async def select_tools_node(state: AgentState) -> dict:
-        prompt = state['messages'][-1].content
+    async def select_tools(prompt) -> dict:
         manifest = get_tool_manifest()
 
         selector_llm = ChatOpenAI(
@@ -105,4 +117,15 @@ class AgentNodes:
             Only select tools that are genuinely needed. If the query is conversational or factual from memory, select none."""),
             HumanMessage(content=prompt)
         ])
-        return {"selected_tools": result.tool_names}
+        return result.tool_names
+
+
+    @staticmethod
+    async def _get_updated_tools(state: AgentState):
+        messages = state["messages"]
+
+        for message in reversed(messages):
+            if isinstance(message, ToolMessage) and message.name=="request_more_tools":
+                parsed_message = json.loads(message.content)
+                return list(set(state.get("selected_tools", []) + parsed_message))
+        return state.get("selected_tools", [])

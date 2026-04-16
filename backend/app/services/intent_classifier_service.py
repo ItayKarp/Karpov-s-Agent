@@ -72,12 +72,17 @@ knowledge base. The knowledge base contains ONLY the following topics:
 Answer "true" if the user's question could plausibly be answered by any of the topics above,
 even if they do not use the exact words — judge by what they are ASKING FOR, not the words they use.
 
+ALWAYS answer "true" if the query contains words like "campus", "university", "school", "college", "what do you know", or "what can you help".
+
 Examples that are "true":
 - "when does the gym close?" → campus building hours
 - "can I switch roommates?" → housing policy
 - "I got a D, will I lose my scholarship?" → GPA + financial aid
 - "where do I go to pay tuition?" → office locations
 - "what happens if I miss too many classes?" → attendance policy
+- "what do you know about my campus?" → meta-question about campus knowledge base
+- "what can you help me with on campus?" → meta-question about campus topics
+- "tell me about campus life" → general campus information
 
 Answer "false" ONLY if the query is clearly outside all of the above topics:
 - Casual greetings or small talk (hi, thanks, how are you)

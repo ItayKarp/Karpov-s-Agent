@@ -9,7 +9,7 @@ class MongoManager:
 
     @classmethod
     async def init(cls):
-        cls._client = AsyncIOMotorClient(settings.mongodb_uri)
+        cls._client = AsyncIOMotorClient(settings.mongodb_uri, tlsAllowInvalidCertificates=True)
 
     @classmethod
     async def close(cls):

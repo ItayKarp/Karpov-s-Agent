@@ -11,11 +11,14 @@ class QdrantRepository:
             openai_api_key=settings.openai_api_key
         )
 
+    CAMPUS_KEYWORDS = {"campus", "university", "college", "school", "dining", "housing", "library", "registrar", "financial aid", "tuition", "dorm", "syllabus", "professor", "course", "gpa", "scholarship"}
+
     async def get_docs(self,needs_retrieval: bool, query:str, top_k: int = 3) -> list:
-        if needs_retrieval:
+        keyword_match = any(kw in query.lower() for kw in self.CAMPUS_KEYWORDS)
+        if needs_retrieval or keyword_match:
             vector = await self.embedder.aembed_query(query)
 
-            results = await self.qdrant_client.aquery_points(
+            results = await self.qdrant_client.query_points(
                 collection_name=settings.qdrant_collection_name,
                 query=vector,
                 limit=top_k,
