@@ -12,7 +12,7 @@ class BaseClass:
     async def astream(llm, formatted):
         response = await llm.ainvoke(formatted)
 
-        return response["messages"][-1].content
+        return response
 
 
     async def execute(self, state: AgentState):

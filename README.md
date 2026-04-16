@@ -14,6 +14,8 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-Cloud-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 ![Qdrant](https://img.shields.io/badge/Qdrant-Vector_DB-FF4785?style=for-the-badge&logo=qdrant&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
 A full-stack AI chat application with a React frontend and a multi-agent FastAPI backend.
 Features real-time streaming, persistent chat history, RAG-powered similarity search, cross-session memory, and intelligent LangGraph-based query routing.
@@ -34,6 +36,7 @@ Features real-time streaming, persistent chat history, RAG-powered similarity se
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
+- [Deployment](#deployment)
 - [API Reference](#api-reference)
 - [Project Structure](#project-structure)
 
@@ -62,15 +65,7 @@ Features real-time streaming, persistent chat history, RAG-powered similarity se
 
 ### LangGraph Flow
 
-```
-START
-  └─► setup          (parallel: intent classify + memory retrieve)
-        └─► retrieve_docs  (Qdrant similarity search if needed)
-              ├─► basic_agent    (Tavily search)
-              └─► advanced_agent (Tavily + arXiv + fetch)
-                    └─► finalize (parallel: LLM title + Mem0 memory update)
-                          └─► END
-```
+<img src="docs/Langgraph-Diagram.png" alt="LangGraph Diagram" width="100%"/>
 
 ---
 
@@ -91,6 +86,9 @@ START
 | Observability | LangSmith |
 | Auth | JWT (RS512) + bcrypt |
 | Package Manager | uv (backend), npm (frontend) |
+| Containerization | Docker, Docker Compose |
+| CI/CD | GitHub Actions |
+| Hosting | AWS EC2 |
 
 ---
 
@@ -162,6 +160,65 @@ npm run dev
 ```
 
 The app expects the backend at `http://localhost:8000`. Update the base URL in `src/api/` if needed.
+
+---
+
+## Deployment
+
+### Docker Compose (local)
+
+Make sure Docker is installed, then from the project root:
+
+```bash
+docker compose up --build
+```
+
+| Service | URL |
+|---|---|
+| Frontend | `http://localhost` |
+| Backend | `http://localhost:8000` |
+
+The `docker-compose.yaml` at the project root builds both services from their respective Dockerfiles:
+- **Frontend** — multi-stage build: Node compiles the Vite app, Nginx serves the static files
+- **Backend** — Python 3.14 slim image with `uv` for fast dependency installation
+
+> The backend reads environment variables from `backend/.env`. Copy `backend/.env.example` to `backend/.env` and fill in your values before running.
+
+---
+
+### CI/CD — GitHub Actions (AWS EC2)
+
+The `.github/workflows/deploy.yaml` pipeline runs automatically on every push to `main`:
+
+```
+lint ──┐
+       ├──► build ──► deploy (+ health check + rollback)
+security ──┘
+```
+
+| Job | What it does |
+|---|---|
+| **lint** | Runs `ruff` on the backend and `eslint` on the frontend |
+| **security** | Scans Python deps with `pip-audit` and npm deps with `npm audit` |
+| **build** | Verifies both Docker images build successfully |
+| **deploy** | SSHs into EC2, pulls latest code, rebuilds containers, runs a health check, and auto-rolls back to the previous commit if the health check fails |
+
+#### Required GitHub Secrets
+
+Go to **Settings → Secrets and variables → Actions** and add:
+
+| Secret | Value |
+|---|---|
+| `EC2_HOST` | Your EC2 public IP or DNS |
+| `EC2_USER` | `ubuntu` (Ubuntu AMI) or `ec2-user` (Amazon Linux) |
+| `EC2_SSH_KEY` | Contents of your `.pem` private key file |
+| `ENV_FILE` | Full contents of your `backend/.env` file |
+
+#### EC2 prerequisites
+
+- Docker and Docker Compose installed
+- Repository cloned at `~/Dual-agent`
+- Ports **80** and **8000** open in the EC2 security group
 
 ---
 
