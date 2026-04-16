@@ -5,16 +5,22 @@ from app.core.config import settings
 
 
 class BasicAgent(BaseClass):
-    def __init__(self, chat_repo, tools):
+    def __init__(self, chat_repo):
         super().__init__(chat_repo=chat_repo)
-        self.tools = tools
         model = ChatOpenAI(model="gpt-5.4-nano",max_tokens=1000,timeout=30, api_key=settings.openai_api_key)
-        self.llm = model.bind_tools(tools=[*self.tools])
+        self.llm = model
         self.system_prompt = ChatPromptTemplate.from_messages([
-            ("system",
-                    """You are a helpful assistant. Answer the user's question clearly and concisely.
-                    What you know about this user:
-                    {memories}
-                    {context_section}"""),
-            MessagesPlaceholder(variable_name="messages")
-        ])
+      ("system",
+          """You are a helpful assistant. Answer the user's question clearly and concisely.
+                                                                                                                                                                         
+  What you know about this user:
+  {memories}                                                                                                                                                             
+  {context_section}
+
+  You have been given a set of tools relevant to this query. Use them if needed.
+  If you need a tool you don't currently have access to, call request_more_tools with the tool name.                                                                     
+                                                                                                                                                                         
+  Available tools you can request:                                                                                                                                       
+  {tool_manifest}"""),
+      MessagesPlaceholder(variable_name="messages")
+  ])

@@ -1,4 +1,4 @@
-from fastapi import Depends, Request
+from fastapi import Depends
 
 from app.agents.advanced_agent import AdvancedAgent
 from app.agents.basic_agent import BasicAgent
@@ -39,7 +39,6 @@ async def get_qdrant_repo():
     return QdrantRepository(qdrant_client=QdrantManager.get_client(), embedding_model=settings.qdrant_embedding_model)
 
 async def get_graph(
-        request: Request,
         chat_repo=Depends(get_chat_repo),
         title_service: TitleService = Depends(get_title_service),
         memory_service: MemoryService = Depends(get_memory_service),
@@ -51,11 +50,9 @@ async def get_graph(
         vector_repository=qdrant_repo,
         basic_agent=BasicAgent(
             chat_repo=chat_repo,
-            tools=request.app.state.basic_tools,
         ),
         advanced_agent=AdvancedAgent(
             chat_repo=chat_repo,
-            tools=request.app.state.advanced_tools,
         ),
         memory_service=memory_service,
         intent_classifier=IntentClassifierService()

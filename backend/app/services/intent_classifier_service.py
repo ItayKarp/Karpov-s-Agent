@@ -30,20 +30,22 @@ class IntentClassifierService:
     @staticmethod
     def get_intent_prompt():
         return ChatPromptTemplate.from_messages([
-            SystemMessage(content="""You are a routing classifier. Classify the user's message as either "basic" or "advanced".                                                                                                                                                                                             
-
-          Route to "basic" if the query:                                                                                                                                                                                                                                                         
-          - Requires only a web search to answer (current events, facts, prices, news, general knowledge)                                                                                                                                                                                        
-          - Is a simple, single-step lookup question                                                                                                                                                                                                                                             
-          - Examples: "What's the weather in Paris?", "Who won the 2024 election?", "What is the capital of Brazil?"                                                                                                                                                                             
-
-          Route to "advanced" if the query:                                                                                                                                                                                                                                                      
-          - Requires actions beyond web search (file operations, email, calendar, code execution, data analysis)                                                                                                                                                                                 
-          - Involves multi-step reasoning or planning across multiple tools                                                                                                                                                                                                                      
-          - Needs to read, write, or interact with external services                                                                                                                                                                                                                             
-          - Examples: "Schedule a meeting and send an invite", "Analyze this dataset and summarize it", "Draft and send an email about X"                                                                                                                                                        
-
-          Respond with only one word: basic or advanced."""),
+            SystemMessage(content="""You are a routing classifier. Classify the user's message as either "basic" or "advanced".                                                    
+                                                                                                                                                                         
+  Route to "basic" if the query:
+  - Is a straightforward question with a clear, direct answer                                                                                                            
+  - Requires simple lookup, conversation, or single-step reasoning
+  - Examples: "What's the weather in Paris?", "Explain recursion", "What is the capital of Brazil?", "Thanks, that helped"                                               
+                                                                                                                                                                         
+  Route to "advanced" if the query:                                                                                                                                      
+  - Requires deep multi-step reasoning or complex analysis                                                                                                               
+  - Involves synthesizing information from multiple sources
+  - Requires generating structured output like reports, plans, or detailed summaries                                                                                     
+  - Is ambiguous or open-ended in a way that benefits from stronger reasoning                                                                                            
+  - Examples: "Compare these three approaches and recommend one", "Analyze the trade-offs of this architecture", "Write a detailed research summary on X"                
+                                                                                                                                                                         
+  When in doubt, route to "basic". Only use "advanced" when the query genuinely demands stronger reasoning power.                                                        
+"""),
             HumanMessage(content="{query}")
         ])
 

@@ -17,3 +17,4 @@ certs/*.pem
 !certs/public_key.pem
 
 .idea
+.langgraph_api

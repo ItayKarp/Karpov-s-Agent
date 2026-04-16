@@ -46,13 +46,14 @@ Features real-time streaming, persistent chat history, RAG-powered similarity se
 
 | | Feature | Description |
 |---|---|---|
-| 🔀 | **LangGraph Orchestration** | A stateful `StateGraph` with five nodes — `setup`, `retrieve_docs`, `basic_agent`, `advanced_agent`, and `finalize` — replaces the old linear orchestrator. Each request flows through the graph with full checkpointing via `MemorySaver`. |
-| 🔍 | **Dual Intent Classification** | GPT-5.4-nano runs two parallel classifiers: one routes to BasicAgent or AdvancedAgent based on query complexity; the other decides whether to trigger RAG retrieval from the campus knowledge base. |
+| 🔀 | **LangGraph Orchestration** | A stateful `StateGraph` with six nodes — `setup`, `select_tools`, `retrieve_docs`, `basic_agent`, `advanced_agent`, and `finalize` — replaces the old linear orchestrator. Each request flows through the graph with full checkpointing via `MemorySaver`. |
+| 🔍 | **Dual Intent Classification** | GPT-5.4-nano runs two parallel classifiers: one routes to BasicAgent or AdvancedAgent based on reasoning power needed; the other decides whether to trigger RAG retrieval from the campus knowledge base. |
+| 🔧 | **Dynamic Tool Selection** | Before each agent run, a fast LLM call picks only the tools relevant to the query from a central tool registry. The agent can also call `request_more_tools` mid-run to expand its own toolset if needed. |
 | 📚 | **RAG / Similarity Search** | Qdrant vector database stores campus knowledge (grading, financial aid, housing, etc.). On relevant queries, the user's prompt is embedded and the top matching documents are retrieved and injected into the agent's context. |
 | ⚡ | **Streaming AI Responses** | Tokens stream in real-time via SSE using `graph.astream_events`. Tool calls and search steps appear as visible chain-of-thought thoughts alongside the response. |
 | 💾 | **Persistent Chat History** | Conversations stored in MongoDB with Redis caching and LLM-generated titles. |
 | 🧠 | **Cross-Session Memory** | After each response, an LLM extracts long-term user facts via Mem0; relevant memories are semantically retrieved and injected into every new prompt. |
-| 🌐 | **Web Search & Academic Papers** | Tavily for web search; arXiv MCP server and fetch MCP server available to the AdvancedAgent. |
+| 🌐 | **Web Search & Academic Papers** | Tavily for web search; arXiv MCP server and fetch MCP server available via dynamic tool selection. |
 | 🔭 | **LangSmith Tracing** | Full observability of every graph run, node transition, LLM call, and tool invocation via LangSmith. |
 | 📝 | **Markdown Rendering** | AI responses render with full markdown support. |
 | 🔐 | **JWT Authentication** | RS512-signed access/refresh token flow with bcrypt password hashing and rate limiting. |
@@ -259,11 +260,11 @@ frontend/src/
 backend/app/
 ├── agents/
 │   ├── graph/              # LangGraph: state, nodes, edges, graph builder
-│   ├── basic_agent.py      # Tavily-only agent
-│   ├── advanced_agent.py   # Tavily + arXiv + fetch agent
-│   └── base_class.py       # Shared agent base
+│   ├── basic_agent.py      # Lightweight agent (GPT-5.4-nano) with dynamic tool access
+│   ├── advanced_agent.py   # Powerful agent (GPT-5.4) with dynamic tool access
+│   └── base_class.py       # Shared agent base (dynamic tool binding at execute time)
 ├── orchestrator/           # AgentOrchestrator (entry point for requests)
-├── tools/                  # Tavily search tools
+├── tools/                  # Tool registry, search tools, and request_more_tools meta-tool
 ├── services/
 │   ├── intent_classifier_service.py  # Dual classifier (mode + retrieval routing)
 │   ├── streaming_service.py          # SSE stream via graph.astream_events

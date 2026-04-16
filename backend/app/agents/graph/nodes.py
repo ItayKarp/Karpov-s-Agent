@@ -1,9 +1,17 @@
-from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.runnables import RunnableConfig
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field
 from time import time
+import asyncio
 
 from app.agents.graph.state import AgentState
-import asyncio
+from app.core import settings
+from app.tools.tool_registry import get_tool_manifest
+
+
+class ToolSelection(BaseModel):
+    tool_names: list[str] = Field(description="Names of the tools needed to answer this query.")
 
 class AgentNodes:
     def __init__(
@@ -77,3 +85,24 @@ class AgentNodes:
         )
 
         return {"elapsed": elapsed_time}
+
+
+    @staticmethod
+    async def select_tools_node(state: AgentState) -> dict:
+        prompt = state['messages'][-1].content
+        manifest = get_tool_manifest()
+
+        selector_llm = ChatOpenAI(
+            model="gpt-5.4-nano",
+            api_key=settings.openai_api_key
+        ).with_structured_output(ToolSelection)
+
+        result = await selector_llm.ainvoke([
+            SystemMessage(content=f"""You are a tool selector. Given a user query, pick only the tools needed to answer it.
+            Available tools:
+            {manifest}
+            
+            Only select tools that are genuinely needed. If the query is conversational or factual from memory, select none."""),
+            HumanMessage(content=prompt)
+        ])
+        return {"selected_tools": result.tool_names}
