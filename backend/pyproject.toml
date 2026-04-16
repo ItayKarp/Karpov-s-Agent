@@ -24,4 +24,5 @@ dependencies = [
     "langchain-pinecone>=0.2.13",
     "pinecone>=7.3.0",
     "qdrant-client>=1.17.1",
+    "langgraph-cli[inmem]>=0.4.21",
 ]

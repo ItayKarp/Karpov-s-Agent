@@ -1,4 +1,3 @@
-from langchain.agents import create_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI
 from app.agents.base_class import BaseClass
@@ -10,7 +9,7 @@ class BasicAgent(BaseClass):
         super().__init__(chat_repo=chat_repo)
         self.tools = tools
         model = ChatOpenAI(model="gpt-5.4-nano",max_tokens=1000,timeout=30, api_key=settings.openai_api_key)
-        self.llm = create_agent(model=model, tools=[*self.tools], )
+        self.llm = model.bind_tools(tools=[*self.tools])
         self.system_prompt = ChatPromptTemplate.from_messages([
             ("system",
                     """You are a helpful assistant. Answer the user's question clearly and concisely.

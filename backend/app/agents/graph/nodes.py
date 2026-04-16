@@ -1,4 +1,4 @@
-from langchain_core.messages import AIMessage
+from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.runnables import RunnableConfig
 from time import time
 
@@ -51,18 +51,22 @@ class AgentNodes:
 
     async def advanced_agent_node(self, state: AgentState) -> dict:
         response = await self.advanced_agent.execute(state)
-        return {"messages": [AIMessage(content=response)]}
+        return {"messages": [response]}
 
 
     async def basic_agent_node(self, state: AgentState):
         response = await self.basic_agent.execute(state)
-        return {"messages": [AIMessage(content=response)]}
+        return {"messages": [response]}
 
     async def finalize_node(self, state: AgentState, config: RunnableConfig) -> dict:
         start_time = config["configurable"]["start_time"]
         elapsed_time = round(time() - start_time, 1)
+        prompt = ""
+        for message in reversed(state['messages']):
+            if isinstance(message, HumanMessage):
+                prompt = message.content
+                break
 
-        prompt = state['messages'][-2].content
         response_text = state['messages'][-1].content
         user_id= state['user_id']
         chat_id = state['chat_id']
