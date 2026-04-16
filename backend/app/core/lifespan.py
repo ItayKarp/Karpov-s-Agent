@@ -2,13 +2,14 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.tools import load_mcp_tools
-from app.core import settings
+
 from app.infrastructure.db.init_mem0 import Mem0Manager
 from app.infrastructure.db.init_mongo import MongoManager
 from app.infrastructure.db.init_qdrant import QdrantManager
 from app.infrastructure.db.init_redis import RedisManager
 from app.core.mcp_config import get_mcp_config
 from app.tools.search_tools import get_search_tools
+from app.tools.tool_registry import register_tools
 
 
 @asynccontextmanager
@@ -26,9 +27,7 @@ async def lifespan(app: FastAPI):
     ):
         arxiv_tools = await load_mcp_tools(arxiv_session)
         fetch_tools = await load_mcp_tools(fetch_session)
-
-        app.state.basic_tools = [*search_tools]
-        app.state.advanced_tools = [*search_tools, *arxiv_tools, *fetch_tools]
+        register_tools([*search_tools, *arxiv_tools, *fetch_tools])
 
         yield
 

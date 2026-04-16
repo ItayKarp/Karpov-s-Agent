@@ -18,13 +18,14 @@ A production-ready, multi-agent AI chat backend with real-time streaming, persis
 
 ## Features
 
-- **LangGraph Orchestration** — A stateful `StateGraph` with five nodes (`setup`, `retrieve_docs`, `basic_agent`, `advanced_agent`, `finalize`) replaces the old linear orchestrator, with full checkpointing via `MemorySaver`
-- **Dual Intent Classification** — GPT-5.4-nano runs two parallel classifiers: one routes to BasicAgent or AdvancedAgent based on complexity; the other decides whether to trigger RAG retrieval
+- **LangGraph Orchestration** — A stateful `StateGraph` with six nodes (`setup`, `select_tools`, `retrieve_docs`, `basic_agent`, `advanced_agent`, `finalize`) replaces the old linear orchestrator, with full checkpointing via `MemorySaver`
+- **Dual Intent Classification** — GPT-5.4-nano runs two parallel classifiers: one routes to BasicAgent or AdvancedAgent based on reasoning power needed; the other decides whether to trigger RAG retrieval
+- **Dynamic Tool Selection** — Before each agent run, a fast LLM call picks only the tools relevant to the query from a central tool registry. The agent can also call `request_more_tools` mid-run to expand its own toolset if needed
 - **RAG / Similarity Search** — Qdrant vector database stores campus knowledge; relevant documents are retrieved and injected into the agent's context
 - **Streaming Responses** — Real-time token streaming via SSE using `graph.astream_events`, with visible chain-of-thought reasoning
 - **Persistent Chat History** — Conversations stored in MongoDB with LLM-generated titles and Redis caching
 - **Cross-Session Memory** — Mem0 integration extracts and retrieves long-term user facts across sessions
-- **Web Search & Academic Papers** — Tavily search and arXiv MCP server for research-oriented queries
+- **Web Search & Academic Papers** — Tavily search, arXiv MCP server, and fetch MCP server available via dynamic tool selection
 - **JWT Authentication** — RSA-512 signed access/refresh token flow with rate limiting
 - **LangSmith Tracing** — Full observability of every graph run, node transition, LLM call, and tool invocation
 
@@ -55,11 +56,11 @@ A production-ready, multi-agent AI chat backend with real-time streaming, persis
 app/
 ├── agents/
 │   ├── graph/              # LangGraph: state, nodes, edges, graph builder
-│   ├── basic_agent.py      # Tavily-only agent
-│   ├── advanced_agent.py   # Tavily + arXiv + fetch agent
-│   └── base_class.py       # Shared agent base
+│   ├── basic_agent.py      # Lightweight agent (GPT-5.4-nano) with dynamic tool access
+│   ├── advanced_agent.py   # Powerful agent (GPT-5.4) with dynamic tool access
+│   └── base_class.py       # Shared agent base (dynamic tool binding at execute time)
 ├── orchestrator/           # AgentOrchestrator (entry point for requests)
-├── tools/                  # Tavily search tools
+├── tools/                  # Tool registry, search tools, and request_more_tools meta-tool
 ├── services/
 │   ├── intent_classifier_service.py  # Dual classifier (mode + retrieval routing)
 │   ├── streaming_service.py          # SSE stream via graph.astream_events
@@ -156,10 +157,11 @@ The API will be available at `http://localhost:8000`.
 
 ```
 START
-  └─► setup          (parallel: intent classify + memory retrieve)
-        └─► retrieve_docs  (Qdrant similarity search if needed)
-              ├─► basic_agent    (Tavily search)
-              └─► advanced_agent (Tavily + arXiv + fetch)
-                    └─► finalize (parallel: LLM title + Mem0 memory update)
-                          └─► END
+  └─► setup           (parallel: intent classify + memory retrieve)
+        └─► select_tools   (LLM picks relevant tools from registry)
+              └─► retrieve_docs  (Qdrant similarity search if needed)
+                    ├─► basic_agent    (GPT-5.4-nano, dynamically bound tools)
+                    └─► advanced_agent (GPT-5.4, dynamically bound tools)
+                          └─► finalize (parallel: LLM title + Mem0 memory update)
+                                └─► END
 ```
