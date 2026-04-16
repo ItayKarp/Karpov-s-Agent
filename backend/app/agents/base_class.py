@@ -36,7 +36,7 @@ class BaseClass:
             "memories": memories,
             "context_section": context_section,
             "messages": messages,
-            "manifest": tool_manifest
+            "tool_manifest": tool_manifest
         })
 
         return await self.astream(llm=llm, formatted=formatted)

@@ -5,9 +5,8 @@ from pymongo.errors import DuplicateKeyError
 class AuthenticationRepository:
     def __init__(self, mongo_client):
         self.client = mongo_client
-        self.db = self.client["AIChatBots"]
-        self.refresh_tokens_collection = self.db["refresh_tokens"]
-        self.users_collection = self.db["exercise_1"]
+        self.users_collection = self.client["exercise_1"]
+        self.refresh_tokens_collection = self.client["refresh_tokens"]
 
 
     async def save_refresh_token(self, user_id, jwt_id, expiration_time):

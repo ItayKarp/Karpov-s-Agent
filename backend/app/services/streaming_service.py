@@ -14,6 +14,9 @@ class StreamingService:
             kind = event["event"]
 
             if kind == "on_chat_model_stream":
+                node = event.get("metadata", {}).get("langgraph_node", "")
+                if node not in ("basic_agent", "advanced_agent"):
+                    continue
                 chunk = event["data"]["chunk"].content
                 if chunk:
                     full_response += chunk
@@ -28,6 +31,11 @@ class StreamingService:
             elif kind == "on_tool_end":
                 thoughts.append({"type": "thought", "content": "Got results, processing..."})
                 yield json.dumps({"type": "thought", "content": "Got results, processing..."}) + "\n"
+
+            elif kind == "on_custom_event" and event["name"] == "thought":
+                message = event["data"]["content"]
+                thoughts.append({"type": "thought", "content": message})
+                yield json.dumps({"type": "thought", "content": message}) + "\n"
 
         await self.chat_repo.save_message(
             role="assistant",
