@@ -61,7 +61,7 @@ Features real-time streaming, persistent chat history, RAG-powered similarity se
 
 ## Architecture
 
-<img src="docs/Karpovs-agent-architecture.svg" alt="Architecture Diagram" width="100%"/>
+<img src="docs/agent-architecture.svg" alt="Architecture Diagram" width="100%"/>
 
 ### LangGraph Flow
 
